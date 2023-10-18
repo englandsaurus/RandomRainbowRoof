@@ -1,0 +1,22 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+#TouchDesigner/Ableton Backups
+Backup/
+*.*.toe
+
+#TouchDesigner Crash Files
+CrashAutoSave.*
+TouchDesignerCrash*.dmp
+
+#Arduino Compilation File
+Firmware/**/*.tmp
+
+#Ableton wav info and tmp files
+*.wav.asd
+AbletonTmp*
+
+#Automatic Mac OS file
+.DS_Store*
+
+#Windows Folder info
+Desktop.ini
