@@ -20,7 +20,6 @@ class Overlays:
             print("Creating Overlays folder: " + self.path)
             os.mkdir(self.path)
         
-        self.overlayList.par.rootfolder = self.path
         self.Load_tox(self.source, "heatnoise")
         self.Load_tox(self.next_source, "heatnoise")
         self.connect_operators()
@@ -59,7 +58,7 @@ class Overlays:
             print("Exception in user code:")
             print("-"*60)
             traceback.print_exc(file=sys.stdout)
-            print("-"*60)
+            print("-"*50)
         pass
 
     def Set_overlay(self, overlay):
@@ -105,7 +104,7 @@ class Overlays:
         try:
             tox_path = tox
             if tox_path is "random":
-                tox_path = str(self.overlayList[randint(1, self.overlayList.numRows - 1), 0])
+                tox_path = self.find_random()
 
             if self.path not in tox_path:
                 tox_path = self.path + '/' + tox_path
@@ -121,7 +120,15 @@ class Overlays:
             traceback.print_exc(file=sys.stdout)
             print("-"*60)
         pass
-        
+
+    def find_random(self):
+        current_pattern = self.source.par.externaltox
+        last_pattern = self.next_source.par.externaltox
+        random_tox_path = current_pattern
+        while ((random_tox_path == current_pattern) or (random_tox_path == last_pattern)):
+            random_tox_path = self.path + '/' + str(self.overlayList[randint(1, self.overlayList.numRows - 1), 'name'])
+        return random_tox_path
+    
     def connect_operators(self):
         try: 
             self.source.outputConnectors[0].connect(self.source_null)
