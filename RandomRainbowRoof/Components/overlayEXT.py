@@ -103,7 +103,7 @@ class Overlays:
         """
         try:
             tox_path = tox
-            if tox_path is "random":
+            if tox_path == "random":
                 tox_path = self.find_random()
 
             if self.path not in tox_path:
