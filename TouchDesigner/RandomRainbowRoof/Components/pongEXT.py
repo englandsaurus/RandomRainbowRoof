@@ -7,7 +7,8 @@ class Pong:
 		self.bullet = ownerComp.op('bsolver1')
 		self.start_trigger = ownerComp.op('start_sim')
 		self.ball = ownerComp.op('ball')
-		self.winner = ownerComp.op('Win_animation/winner')
+		self.winner = ownerComp.op('win_animation/winner')
+		self.win_trigger = ownerComp.op('win_animation/win_trigger')
 		print(f'{__class__.__name__} class initialized from {self.ownerComp.name}.')
 		pass
 	
@@ -21,4 +22,8 @@ class Pong:
 		pass
 	
 	def Win_game(self, Channel):
-		self.winner[0].val = Channel
+		print(Channel.index)
+		self.winner.par.const0value = Channel.index
+		self.win_trigger.par.trigger.pulse()
+		self.bullet.par.initall.pulse()
+		pass
